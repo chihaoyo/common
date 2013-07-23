@@ -15,7 +15,7 @@ _str	string-related
 _se		session-related
 _ml		multilingual support
 
-- make importer.php in each project
+- make __importer.php__ in each project
 sample:
 
 <?php
@@ -26,4 +26,4 @@ include_once('../common/lib-db.php');
 
 ?>
 
-- import importer.php in major files of the project
+- import __importer.php__ in major files of the project
