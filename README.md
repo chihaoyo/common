@@ -21,8 +21,14 @@ sample:
 <?php
 
 $is_debugging = true;
-include_once('../common/lib-misc.php');
-include_once('../common/lib-db.php');
+set_include_path(get_include_path() . PATH_SEPARATOR . '/var/www/html');
+
+$__db = array('user' => 'user', 'password' => 'password');
+$__app = array('name' => basename(dirname($_SERVER['REQUEST_URI'])), 'root' => 'root');
+
+include_once('common/lib-misc.php');
+include_once('common/lib-db.php');
+include_once('common/lib-session.php');
 
 ?>
 
