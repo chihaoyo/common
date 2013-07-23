@@ -16,7 +16,9 @@ _se		session-related
 _ml		multilingual support
 
 1. make __importer.php__ in each project
-sample:
+2. import __importer.php__ in major files of the project
+
+__importer.php__ sample:
 
 <?php
 
@@ -31,5 +33,3 @@ include_once('common/lib-db.php');
 include_once('common/lib-session.php');
 
 ?>
-
-2. import __importer.php__ in major files of the project
