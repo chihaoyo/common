@@ -25,11 +25,17 @@ class _DO extends PDO {
 }
 
 // factory
-function connect_to_db($db_name) {
+function connect_to_db($db_name = '') {
+	global $__app;
+	global $__db;
+	
+	if($db_name == '')
+		$db_name = $__app['name'];
+	
 	$db = false;
 	if($db_name != '') {
 		try {
-			$db = new _DO("mysql:host=localhost;dbname=$db_name", 'root', '/*gr0w1ng*/', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES UTF8"));
+			$db = new _DO("mysql:host=localhost;dbname=$db_name", $__db['user'], $__db['password'], array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES UTF8"));
 		} catch (PDOException $e) {
 			___('Could not connect to database: ' . $e->getMessage());
 		}

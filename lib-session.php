@@ -9,8 +9,12 @@
 class _SO {
 	private $db = false;
 	
-	function __construct($db_name) { // = 'common') {
-		$this->db = make_db($db_name);
+	function __construct($db_name = '') { // = 'common') {
+		global $__app;
+		if($db_name == '')
+			$db_name = $__app['name'];
+			
+		$this->db = connect_to_db($db_name);
 	}
 	function open() {
 		return ($this->db ? true : false);
@@ -49,8 +53,7 @@ ini_set('session.save_handler', 'user');	// enable user-defined session handlers
 ini_set('session.gc_divisor', 10);			// propability to perform gc set to 10%
 
 // set session handlers
-$__app_name = basename(dirname($_SERVER['REQUEST_URI']));
-$__se = new _SO($__app_name);
+$__se = new _SO();
 session_set_save_handler(array(&$__se, 'open'), array(&$__se, 'close'), array(&$__se, 'read'), array(&$__se, 'write'), array(&$__se, 'destroy'), array(&$__se, 'clean'));
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
