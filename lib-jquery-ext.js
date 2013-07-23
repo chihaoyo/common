@@ -43,10 +43,10 @@ jQuery.fn._padding = function(which) {
 		p = parseInt(p);
 //	console.log(p);
 	return p;
-};
+};/*
 jQuery.fn.reset_css = function() {
 	return $(this).css({backgroundColor: 'inherit', fontFamily: 'inherit', fontSize: 'inherit'});
-};
+};*/
 ///// HANDLERS /////
 /* 
 
