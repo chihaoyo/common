@@ -36,7 +36,8 @@ function connect_to_db($db_name = '') {
 	if($db_name != '') {
 		try {
 			$db = new _DO("mysql:host=localhost;dbname=$db_name", $__db['user'], $__db['password'], array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES UTF8"));
-		} catch (PDOException $e) {
+		}
+		catch (PDOException $e) {
 			___('Could not connect to database: ' . $e->getMessage());
 		}
 	}
@@ -53,7 +54,22 @@ function make_db($db_name) { // deprecated
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function create_db($db_name) {
-	return false;
+	global $__db;
+		
+	$handler = false;
+	try {
+		$handler = new _DO("mysql:host=localhost", $__db['user'], $__db['password'], array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES UTF8"));
+	}
+	catch (PDOException $e) {
+		___('Could not connect to mysql: ' . $e->getMessage());
+	}
+	
+	$sql = "CREATE DATABASE $db_name DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;";
+	$result = $handler->exec($sql);
+	$handler = null;
+	
+	init_table_session_in_db($db_name);
+	init_table_member_in_db($db_name);
 }
 
 function init_table_session_in_db($db_name) {
@@ -61,10 +77,10 @@ function init_table_session_in_db($db_name) {
 	
 	$db->q('DROP TABLE IF EXISTS session');
 	$sql = 'CREATE TABLE IF NOT EXISTS session (
-		session_id VARCHAR(256) NOT NULL,
+		session_id VARCHAR(128) NOT NULL,
 		access_time INT(16) NOT NULL,
 		data TEXT NOT NULL,
-		PRIMARY KEY (session_id))';
+		PRIMARY KEY (session_id));';
 	$db->q($sql);
 	$db = null;
 }
