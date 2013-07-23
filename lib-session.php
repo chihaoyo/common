@@ -9,11 +9,7 @@
 class _SO {
 	private $db = false;
 	
-	function __construct($db_name = '') { // = 'common') {
-		global $__app;
-		if($db_name == '')
-			$db_name = $__app['name'];
-			
+	function __construct($db_name = '') {
 		$this->db = connect_to_db($db_name);
 	}
 	function open() {

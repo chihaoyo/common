@@ -29,7 +29,7 @@ function connect_to_db($db_name = '') {
 	global $__app;
 	global $__db;
 	
-	if($db_name == '')
+	if($db_name == '' && isset($__app['name']))
 		$db_name = $__app['name'];
 	
 	$db = false;
