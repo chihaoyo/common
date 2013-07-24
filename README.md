@@ -23,13 +23,13 @@ __importer.php__ sample:
 <?php
 
 $is_debugging = true;
-set_include_path(get_include_path() . PATH_SEPARATOR . '/var/www/html');
+set_include_path(get_include_path() . PATH_SEPARATOR . '/var/www/html/common');
 
-$__db = array('user' => 'user', 'password' => 'password');
-$__app = array('name' => basename(dirname($_SERVER['REQUEST_URI'])), 'root' => 'root');
+$__db = array('user' => 'root', 'password' => 'p1aigr0und');
+$__app = array('name' => basename(dirname($_SERVER['SCRIPT_NAME'])), 'root' => 'chihaoyo');
 
-include_once('common/lib-misc.php');
-include_once('common/lib-db.php');
-include_once('common/lib-session.php');
+include_once('lib-misc.php');
+include_once('lib-db.php');
+include_once('lib-session.php');
 
 ?>
