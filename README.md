@@ -25,8 +25,8 @@ __importer.php__ sample:
 $is_debugging = true;
 set_include_path(get_include_path() . PATH_SEPARATOR . '/var/www/html/common');
 
-$__db = array('user' => 'root', 'password' => 'p1aigr0und');
-$__app = array('name' => basename(dirname($_SERVER['SCRIPT_NAME'])), 'root' => 'chihaoyo');
+$__db = array('user' => 'root', 'password' => 'password');
+$__app = array('name' => strtolower(str_replace(array('-', ' '), '_', basename(dirname($_SERVER['SCRIPT_NAME'])))), 'root' => 'root');
 
 include_once('lib-misc.php');
 include_once('lib-db.php');
