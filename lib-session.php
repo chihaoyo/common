@@ -104,7 +104,7 @@ if(session_id() == '') {
 	_se_set('lang', 'zh-tw');
 }
 
-___(_se_id());
-___(_se_get('lang'));
+//___(_se_id());
+//___(_se_get('lang'));
 
 ?>
