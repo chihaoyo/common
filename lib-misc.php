@@ -11,36 +11,81 @@ date_default_timezone_set(isset($__context['timezone']) ? $__context['timezone']
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-if(!isset($is_debugging) || $is_debugging == true)  {
+if(!isset($__app) || !isset($__app['is_debugging']) || $__app['is_debugging'] == true)  {
+//	echo "<pre>report all errors</pre>";
 	ini_set('display_errors', 'On');
-	error_reporting(E_ALL);
+	error_reporting(-1);
 }
 
-function ___rt($obj) {
-	if(is_string($obj))
-		$string = $obj;
-	else if(is_bool($obj))
-		$string = ($obj ? 'true' : 'false');
-	else
-		$string = print_r($obj, true);
-	
-	$string = htmlspecialchars($string);
-	
-	if(strpos($string, '///') !== false) {
-		$temp = explode('///', $string);
-		$string = '<tr><td><pre>' . implode('</pre></td><td><pre>', $temp) . '</pre></td></tr>' . "\n";
+function ___($obj, $return = false, $table = false, $caption = 'data table') {
+	$string = '';
+	if($table) {
+		if(!is_array($obj)) {
+			$string = '<pre>not a table</pre>';
+		}
+		else if(count($obj) < 1) {
+			$string = '<pre>table is empty</pre>';
+		}
+		else {
+			$head = '<th><pre>#</pre></th>';
+			foreach(reset($obj) as $k => $v) {
+				$head .= "<th><pre>$k</pre></th>";
+			}
+			$head = "<tr>$head</tr>";
+			$body = '';
+			$counter = 0;
+			foreach($obj as $row) {
+				$row_html = "<th><pre>$counter</pre></th>";
+				foreach($row as $col) {
+					$row_html .= "<td><pre>$col</pre></td>";
+				}
+				$body .= "<tr>$row_html</tr>";
+				$counter++;
+			}
+			$string = "<table><caption><pre>$caption</pre></caption><thead>$head</thead><tbody>$body></tbody></table>";
+		}
 	}
-	else
-		$string = '<pre>' . $string . '</pre>' . "\n";
+	else {
+		if(is_string($obj))
+			$string = $obj;
+		else if(is_bool($obj))
+			$string = ($obj ? 'true' : 'false');
+		else
+			$string = print_r($obj, true);
 		
-	return $string;
+		$string = htmlspecialchars($string);
+		
+		if(strpos($string, '///') !== false) {
+			$temp = explode('///', $string);
+			$string = '<tr><td><pre>' . implode('</pre></td><td><pre>', $temp) . '</pre></td></tr>' . "\n";
+		}
+		else
+			$string = '<pre>' . $string . '</pre>' . "\n";
+	}
+	
+	if($return)
+		return $string;
+	else {
+		echo $string;
+		@ob_flush();
+		@flush();
+	}
 }
 
-function ___($obj) {	
-	echo(___rt($obj));
-	
-	@ob_flush();
-	@flush();
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///// ARRAY /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function select($key, $array) {
+	$result = array();
+	foreach($array as $item) {
+		$result[] = $item[$key];
+	}
+	return $result;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

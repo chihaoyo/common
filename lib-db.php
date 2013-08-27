@@ -7,6 +7,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class _DO extends PDO {
+	// basic functions for query
 	public function q($sql) {
 		return ($this->query($sql) !== false ? true : false);
 	}
@@ -22,6 +23,38 @@ class _DO extends PDO {
 	public function e($string) {
 		return substr($this->quote($string), 1, -1);
 	}
+
+	// packaged functions
+	public function delete_table($table) {
+		$this->q("DROP TABLE IF EXISTS $table");
+	}
+	public function empty_table($table) {
+		$this->q("TRUNCATE $table");
+		$this->q("ALTER TABLE $table AUTO_INCREMENT = 1");
+	}
+	public function create_table($name, $fields) {
+		$sql = "CREATE TABLE IF NOT EXISTS $name (serial INT(32) NOT NULL AUTO_INCREMENT, PRIMARY KEY (serial),";
+		$field_strings = array();
+		foreach($fields as $key => $properties) {
+			$field_strings[] = "$key $properties";
+		}
+		$sql .= implode(', ', $field_strings) . ')';
+		$this->q($sql);
+	}
+	public function overwrite_table($name, $fields) {
+		$this->delete_table($name);
+		$this->create_table($name, $fields);
+		$this->empty_table($name);
+	}
+	public function table_exists($table_name) {
+		$result = $this->qf('SELECT database()');
+		$db_name = $result['database()'];
+		$result = $this->qf("SELECT * FROM information_schema.TABLES WHERE TABLE_SCHEMA = '$db_name' AND TABLE_NAME = '$table_name'");
+		if($result !== false)
+			$result = true;
+			
+		return $result;
+	}
 }
 
 // factory
@@ -34,12 +67,13 @@ function connect_to_db($db_name = '') {
 	
 	$db = false;
 	if($db_name != '') {
-		try {
+/*		try {
 			$db = new _DO("mysql:host=localhost;dbname=$db_name", $__db['user'], $__db['password'], array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES UTF8"));
 		}
 		catch (PDOException $e) {
 			___('Could not connect to database: ' . $e->getMessage());
-		}
+		}*/
+		$db = new _DO("mysql:host=localhost;dbname=$db_name", $__db['user'], $__db['password'], array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES UTF8"));
 	}
 	return $db;
 }
