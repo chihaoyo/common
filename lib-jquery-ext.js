@@ -27,11 +27,17 @@ from http://jsfiddle.net/uthyZ/
 	
 	return x_overlap*y_overlap;
 };
-jQuery.fn._index = function() {
-	return $(this).attr('index');
+jQuery.fn._index = function(x) {
+	if(typeof x == 'undefined')
+		return $(this).attr('index');
+	else
+		return $(this).filter('[index="' + x + '"]');
 };
-jQuery.fn._id = function() {
-	return $(this).attr('id');
+jQuery.fn._id = function(x) {
+	if(typeof x == 'undefined')
+		return $(this).attr('id');
+	else
+		return $(this).filter('[id="' + x + '"]');
 };
 jQuery.fn._padding = function(which) {
 	if(typeof which == 'undefined')
