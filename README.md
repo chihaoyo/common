@@ -19,8 +19,8 @@ Function prefixes:
 
 # How to use
 
-1. Make *importer.php* in each project.
-2. Import *importer.php* in major files of the project.
+1. Make __importer.php__ in each project.
+2. Import __importer.php__ in major files of the project.
 
 An __importer.php__ sample:
 
