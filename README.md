@@ -1,6 +1,8 @@
 common
 ======
 
+# Intro
+
 A common library for php+javascript.
 
 classes:
@@ -8,12 +10,14 @@ _DO database
 _SO session
 
 prefixes:
-___		debug
-__*		hidden
-_*		system
-_str	string-related
-_se		session-related
-_ml		multilingual support
+- ___		debug
+- __*		hidden
+- _*		system
+- _str	string-related
+- _se		session-related
+- _ml		multilingual support
+
+# How to use
 
 1. make __importer.php__ in each project
 2. import __importer.php__ in major files of the project
