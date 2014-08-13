@@ -6,21 +6,21 @@ common
 A common library for PHP+Javascript.
 
 Class prefixes:
-- _DO database
-- _SO session
+- `_DO` database
+- `_SO` session
 
 Function prefixes:
-- ___		debug
-- __*		hidden
-- _*		system
-- _str	string-related
-- _se		session-related
-- _ml		multilingual support
+- `___`		debug
+- `__*`		hidden
+- `_*`		system
+- `_str`	string-related
+- `_se`		session-related
+- `_ml`		multilingual support
 
 # How to use
 
-1. make __importer.php__ in each project
-2. import __importer.php__ in major files of the project
+1. Make `importer.php` in each project.
+2. Import `importer.php` in major files of the project.
 
 An __importer.php__ sample:
 
