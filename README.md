@@ -3,13 +3,13 @@ common
 
 # Intro
 
-A common library for php+javascript.
+A common library for PHP+Javascript.
 
-classes:
-_DO database
-_SO session
+Class prefixes:
+- _DO database
+- _SO session
 
-prefixes:
+Function prefixes:
 - ___		debug
 - __*		hidden
 - _*		system
@@ -22,7 +22,7 @@ prefixes:
 1. make __importer.php__ in each project
 2. import __importer.php__ in major files of the project
 
-__importer.php__ sample:
+An __importer.php__ sample:
 
 	<?php
 
