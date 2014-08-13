@@ -31,7 +31,7 @@ An __importer.php__ sample:
 
 	$__context = array('timezone' => 'America/New_York');
 	$__db = array('user' => 'root', 'password' => 'PasswordForRoot');
-	$__app = array('name' => basename(dirname($_SERVER['SCRIPT_NAME'])), 'root' => 'chihaoyo');
+	$__app = array('name' => basename(dirname($_SERVER['SCRIPT_NAME'])), 'root' => 'RootUserName');
 
 	include_once('lib-misc.php');
 	include_once('lib-db.php');
