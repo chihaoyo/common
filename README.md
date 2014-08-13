@@ -30,7 +30,7 @@ An __importer.php__ sample:
 	set_include_path(get_include_path() . PATH_SEPARATOR . '/var/www/html/common');
 
 	$__context = array('timezone' => 'America/New_York');
-	$__db = array('user' => 'root', 'password' => 'p1aigr0und');
+	$__db = array('user' => 'root', 'password' => 'PasswordForRoot');
 	$__app = array('name' => basename(dirname($_SERVER['SCRIPT_NAME'])), 'root' => 'chihaoyo');
 
 	include_once('lib-misc.php');
